@@ -7,14 +7,15 @@ function Intro() {
 
 
     useEffect(() => {
-        if (logoRef.current) { // current me sirve para detectar el elemento al que estoy haciendo referencia
+        if (logoRef.current) {
             setTimeout(() => {
                 logoRef.current.style.opacity = 1
             }, 500);
         }
     }, []);
+
     document.body.classList.add('overflow-hidden')
-    console.log(document.body)
+
     useEffect(() => {
         setTimeout(() => {
             if (loaderRef.current && containerRef.current) { // Primer efecto a los 4s
@@ -28,13 +29,13 @@ function Intro() {
                         setTimeout(() => { // ultimo efecto a los 10s (desaparece la imagen)
                             containerRef.current.remove();
                             document.body.classList.remove('overflow-hidden');
-                        }, 3000);
+                        }, 2300);
                     }, 1000);
                 }, 2000)
             }
-        }, 4000);
+        }, 3000);
     }, [])
-    return <div ref={containerRef} className='absolute h-screen w-screen flex flex-col gap-8 items-center justify-center bg-black text-gray-200 transition-background duration-2300 ease'>
+    return <div ref={containerRef} className='fixed z-5 h-screen w-screen flex flex-col gap-8 items-center justify-center bg-black text-gray-200 transition-background duration-2300 ease'>
         <img
             ref={logoRef} // apunto a este elemento
             src="/src/assets/logo-fma.png"
