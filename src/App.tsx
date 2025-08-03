@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <Intro />
+      {/* <Intro /> */}
       <header className='w-auto sticky inset-x-0 top-0 z-4 bg-black p-0 md:py-6 shadow-md shadow-black'>
         <nav>
           <div className='md:hidden'>

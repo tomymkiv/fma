@@ -9,7 +9,7 @@ interface Props {
 function Seccion(props: Props) {
     const { apartado, children, clases } = props;
 
-    return <section className={"w-screen my-24 text-gray-200 font-medium text-center " + clases} id={apartado} >
+    return <section className={"w-screen text-gray-200 font-medium text-center " + clases} id={apartado} >
         {children}
     </section>;
 }
