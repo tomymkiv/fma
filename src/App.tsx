@@ -19,10 +19,10 @@ function App() {
   return (
     <>
       <Intro />
-      <header className='w-full fixed inset-x-0 top-0 z-4 bg-black p-0 md:py-6 px-3 shadow-md shadow-black'>
+      <header className='w-auto sticky inset-x-0 top-0 z-4 bg-black p-0 md:py-6 shadow-md shadow-black'>
         <nav>
           <div className='md:hidden'>
-            <button id='menu-btn' onClick={Menu} className='flex p-6 flex-col gap-1'>
+            <button id='menu-btn' onClick={Menu} className='flex p-6 flex-col gap-1 mx-3'>
               <div className="w-[25px] h-[2px] bg-gray-300"></div>
               <div className="w-[15px] h-[2px] bg-gray-300"></div>
               <div className="w-[4px] h-[2px] bg-gray-300"></div>
@@ -55,7 +55,7 @@ function App() {
       <main id='home'>
         <Seccion apartado='presentacion' clases='!my-0'>
           <div className='w-full flex items-center justify-center'>
-            <img src={fmPhoto} className='w-screen h-screen opacity-30 animate-[zoom_12s_ease-in-out_infinite_alternate] object-cover block object-center' alt="" />
+            <img src={fmPhoto} className='w-screen h-screen opacity-30 lg:animate-[zoom_12s_ease-in-out_infinite_alternate] object-cover block object-center' alt="" />
           </div>
           <div className='absolute top-[40%] left-[50%] -translate-[50%] z-0 flex flex-col items-center justify-center gap-10 max-w-[800px] w-[90%]'>
             <article className='flex flex-col items-center gap-8'>
