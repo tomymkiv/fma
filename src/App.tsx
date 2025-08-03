@@ -1,4 +1,10 @@
 import './App.css';
+// imagenes
+import logo from './assets/logo-fma.png'
+import fmPhoto from './assets/fm.webp'
+import fmCat1 from './assets/fma-categoria-1.webp'
+import fmCat2 from './assets/fma-categoria-2.webp'
+import contactImg from './assets/contacto-img.jpeg'
 import Menu from './functions/Menu';
 import Intro from './components/Intro';
 import NavLinks from './components/nav/NavLinks';
@@ -35,7 +41,7 @@ function App() {
           </div>
           <ul className='hidden md:flex items-center md:justify-between lg:justify-around'>
             <div>
-              <img src="/src/assets/logo-fma.png" alt="" className='w-full max-w-[150px]' />
+              <img src={logo} alt="" className='w-full max-w-[150px]' />
             </div>
             <div className='flex justify-center gap-5 text-lg font-medium mr-10'>
               <NavLinks apartado='#presentacion' text='Presentacion' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
@@ -49,7 +55,7 @@ function App() {
       <main id='home'>
         <Seccion apartado='presentacion' clases='!my-0'>
           <div className='w-full flex items-center justify-center'>
-            <img src="/src/assets/fm.webp" className='w-screen h-screen opacity-30 animate-[zoom_12s_ease-in-out_infinite_alternate] object-cover block object-center' alt="" />
+            <img src={fmPhoto} className='w-screen h-screen opacity-30 animate-[zoom_12s_ease-in-out_infinite_alternate] object-cover block object-center' alt="" />
           </div>
           <div className='absolute top-[40%] left-[50%] -translate-[50%] z-0 flex flex-col items-center justify-center gap-10 max-w-[800px] w-[90%]'>
             <article className='flex flex-col items-center gap-8'>
@@ -65,23 +71,23 @@ function App() {
         </Seccion>
         <Seccion apartado='sobrenosotros' clases='h-screen flex items-center bg-[#0007]'>
           <div className="flex flex-col gap-10 lg:gap-6.5 p-8 scroll-mt-[50px] w-full">
-            <SeccionPrincipal img1={<Image enlace="/src/assets/fm.webp" clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='¿Quiénes somos?' text='Forza Motorsport Argentina (FMA) es una comunidad dedicada al simracing en Forza Motorsport. Promovemos una competencia justa y responsable, con reglamentos estrictos que garantizan el respeto en pista. Nuestro objetivo es fomentar un entorno sano, donde el compromiso y la deportividad sean los pilares de cada carrera.' />
+            <SeccionPrincipal img1={<Image enlace={fmPhoto} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='¿Quiénes somos?' text='Forza Motorsport Argentina (FMA) es una comunidad dedicada al simracing en Forza Motorsport. Promovemos una competencia justa y responsable, con reglamentos estrictos que garantizan el respeto en pista. Nuestro objetivo es fomentar un entorno sano, donde el compromiso y la deportividad sean los pilares de cada carrera.' />
             <RedirectBtn enlace='#categorias' text='Siguiente apartado' />
           </div>
         </Seccion>
         <Seccion apartado='categorias' clases='h-screen flex items-center bg-[#0007]'>
           <div className="flex flex-col gap-10 p-8 w-full">
             <SeccionPrincipal clases='flex-wrap' img1={
-              <Image enlace="/src/assets/fma-categoria-1.webp" clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:max-w-[175px] xl:max-w-[250px]' />
+              <Image enlace={fmCat1} clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:max-w-[175px] xl:max-w-[250px]' />
             } img2={
-              <Image enlace="/src/assets/fma-categoria-2.webp" clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:max-w-[175px] xl:max-w-[250px]' />
+              <Image enlace={fmCat2} clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:max-w-[175px] xl:max-w-[250px]' />
             } title='Categorías activas' />
             <RedirectBtn enlace='#contacto' text='Siguiente apartado' />
           </div>
         </Seccion>
         <Seccion apartado='contacto' clases='h-screen flex items-center bg-[#0007]'>
           <div className="flex flex-col gap-10 scroll-mt-[50px] p-8 w-full">
-            <SeccionPrincipal img1={<Image enlace="/src/assets/contacto-img.jpeg" clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='Contactanos' text='Ante cualquier duda que tengas, podés comunicarte con nosotros mediante nuestras redes sociales:' >
+            <SeccionPrincipal img1={<Image enlace={contactImg} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='Contactanos' text='Ante cualquier duda que tengas, podés comunicarte con nosotros mediante nuestras redes sociales:' >
               <div className="flex items-center justify-center gap-10">
                 <a href="https://www.instagram.com/liga_fma/" target='__blank'>
                   <svg className='drop-shadow-white transition-all duration-500 w-[50px] fill-gray-200' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">

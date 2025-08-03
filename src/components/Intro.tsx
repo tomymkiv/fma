@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import logo from '../assets/logo-fma.png'
 
 function Intro() {
     const [logoClass, setLogoClass] = useState({
@@ -46,7 +47,7 @@ function Intro() {
     }, [])
     return <div className={'fixed z-5 h-screen w-screen flex flex-col gap-8 items-center justify-center text-gray-200 transition-background duration-2300 ease ' + containerBackground}>
         <img
-            src="/src/assets/logo-fma.png"
+            src={logo}
             alt="Logo FMA"
             className='min-w-[100px] max-w-3xs w-full transition-scale ease duration-2300 opacity-0 mx-2'
             style={logoClass}
