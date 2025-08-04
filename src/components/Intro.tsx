@@ -12,6 +12,7 @@ function Intro() {
     const [containerBackground, setContainerBackground] = useState('bg-black'); // inicialmente la pantalla será negra
 
     useEffect(() => {
+        document.body.classList.add('overflow-hidden');
         setTimeout(() => {
             setLogoClass({
                 opacity: 1,
