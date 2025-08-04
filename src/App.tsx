@@ -11,8 +11,18 @@ import NavLinks from './components/nav/NavLinks';
 import Seccion from './components/Seccion';
 import Image from './components/images/Image';
 import SeccionPrincipal from './components/SeccionPrincipal';
+import { useRef } from 'react';
 
 function App() {
+  // const containerRef = useRef(null);
+  // const aparicionProgresiva = () =>{
+  //   const observer = new IntersectionObserver((entries)=>{
+  //     entries.forEach((entry)=>{
+  //       console.log(entry.isIntersecting);
+  //     })
+  //   });
+  //   observer.observe(containerRef)
+  // }
   const year = new Date().getFullYear();
 
   return (
@@ -40,7 +50,9 @@ function App() {
           </div>
           <ul className='hidden md:flex items-center md:justify-between lg:justify-around'>
             <div>
-              <img src={logo} alt="" className='ml-5 w-full max-w-[150px]' />
+              <a href="#home">
+                <img src={logo} alt="" className='ml-5 w-full max-w-[150px]' />
+              </a>
             </div>
             <div className='flex justify-center gap-5 text-lg font-medium mr-10'>
               <NavLinks apartado='#presentacion' text='Presentacion' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
