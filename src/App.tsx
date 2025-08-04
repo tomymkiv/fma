@@ -11,23 +11,51 @@ import NavLinks from './components/nav/NavLinks';
 import Seccion from './components/Seccion';
 import Image from './components/images/Image';
 import SeccionPrincipal from './components/SeccionPrincipal';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 function App() {
-  // const containerRef = useRef(null);
-  // const aparicionProgresiva = () =>{
-  //   const observer = new IntersectionObserver((entries)=>{
-  //     entries.forEach((entry)=>{
-  //       console.log(entry.isIntersecting);
-  //     })
-  //   });
-  //   observer.observe(containerRef)
-  // }
+  const container1Ref = useRef(null);
+  const container2Ref = useRef(null);
+  const container3Ref = useRef(null);
   const year = new Date().getFullYear();
+
+  useEffect(() => {
+
+    if (!container1Ref.current || !container2Ref.current || !container3Ref.current)
+      return; // Si no existe, salgo
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+
+        // Que se muestre si paso por encima
+        if (entry.isIntersecting && entry.target.classList.contains('opacity-0')) {
+          entry.target.classList.replace('opacity-0', 'opacity-100');
+          entry.target.classList.replace('-top-[10%]', 'top-0');
+        }
+        // Lo oculto al pasarle por encima
+        if (!entry.isIntersecting) {
+          entry.target.classList.replace('opacity-100', 'opacity-0');
+          entry.target.classList.replace('top-0', '-top-[10%]');
+        }
+
+      })
+    }, {
+      threshold: 0.70
+    });
+
+    observer.observe(container1Ref.current);
+    observer.observe(container2Ref.current);
+    observer.observe(container3Ref.current);
+
+    return () => {
+      observer.disconnect();
+    }
+  }, [])
+
 
   return (
     <>
-      <Intro />
+      {/* <Intro /> */}
       <header className='w-auto sticky inset-x-0 top-0 z-4 bg-black p-0 md:py-6 shadow-md shadow-black'>
         <nav>
           <div className='md:hidden'>
@@ -66,7 +94,7 @@ function App() {
       <main id='home'>
         <Seccion apartado='presentacion' clases='!my-0'>
           <div className='w-full flex items-center justify-center'>
-            <img src={fmPhoto} className='w-screen h-screen opacity-30 lg:animate-[zoom_12s_ease-in-out_infinite_alternate] object-cover block object-center' alt="" />
+            <img src={fmPhoto} className='w-screen h-screen opacity-30 lg:animate-[zoom_12s_ease-in-out_infinite_alternate] -z-1 object-cover block object-center' alt="" />
           </div>
           <div className='absolute top-[40%] left-[50%] -translate-[50%] z-0 flex flex-col items-center justify-center gap-10 max-w-[800px] w-[90%]'>
             <article className='flex flex-col items-center gap-8'>
@@ -79,13 +107,13 @@ function App() {
             </article>
           </div>
         </Seccion>
-        <Seccion apartado='sobrenosotros' clases='h-screen flex items-center bg-[#0007]'>
-          <div className="flex flex-col gap-10 lg:gap-6.5 p-8 scroll-mt-[50px] w-full">
+        <Seccion apartado='sobrenosotros' clases='h-screen flex items-center bg-[#090909]'>
+          <div ref={container1Ref} className="flex flex-col gap-10 lg:gap-6.5 p-8 relative -top-[10%] scroll-mt-[50px] transition-all duration-500 opacity-0 w-full">
             <SeccionPrincipal img1={<Image enlace={fmPhoto} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='¿Quiénes somos?' text='Forza Motorsport Argentina (FMA) es una comunidad dedicada al simracing en Forza Motorsport. Promovemos una competencia justa y responsable, con reglamentos estrictos que garantizan el respeto en pista. Nuestro objetivo es fomentar un entorno sano, donde el compromiso y la deportividad sean los pilares de cada carrera.' />
           </div>
         </Seccion>
-        <Seccion apartado='categorias' clases='h-screen flex items-center bg-[#0007]'>
-          <div className="flex flex-col gap-10 p-8 w-full">
+        <Seccion apartado='categorias' clases='h-screen 2xl:h-[100%] flex items-center bg-[#0007]'>
+          <div ref={container2Ref} className="flex flex-col gap-10 p-8 w-full relative -top-[10%] transition-all duration-500 opacity-0">
             <SeccionPrincipal clases='flex-wrap' img1={
               <Image enlace={fmCat1} clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:min-w-[300px] 2xl:min-w-[400px] max-w-full' />
             } img2={
@@ -94,7 +122,7 @@ function App() {
           </div>
         </Seccion>
         <Seccion apartado='contacto' clases='h-screen flex items-center bg-[#0007]'>
-          <div className="flex flex-col gap-10 scroll-mt-[50px] p-8 w-full">
+          <div ref={container3Ref} className="flex flex-col gap-10 scroll-mt-[50px] p-8 relative -top-[10%] w-full transition-all duration-500 opacity-0">
             <SeccionPrincipal img1={<Image enlace={contactImg} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='Contactanos' text='Ante cualquier duda que tengas, podés comunicarte con nosotros mediante nuestras redes sociales:' >
               <div className="flex items-center justify-center gap-10">
                 <a href="https://www.instagram.com/liga_fma/" target='__blank'>
