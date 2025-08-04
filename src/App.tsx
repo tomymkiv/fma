@@ -1,6 +1,6 @@
 import './App.css';
 // imagenes
-import logo from './assets/logo-fma.png'
+import logo from './assets/logo-fma-blanco.png'
 import fmPhoto from './assets/fm.webp'
 import fmCat1 from './assets/fma-categoria-1.webp'
 import fmCat2 from './assets/fma-categoria-2.webp'
@@ -40,7 +40,7 @@ function App() {
 
       })
     }, {
-      threshold: 0.70
+      threshold: 0.45
     });
 
     observer.observe(container1Ref.current);
@@ -51,7 +51,6 @@ function App() {
       observer.disconnect();
     }
   }, [])
-
 
   return (
     <>
@@ -112,7 +111,7 @@ function App() {
             <SeccionPrincipal img1={<Image enlace={fmPhoto} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='¿Quiénes somos?' text='Forza Motorsport Argentina (FMA) es una comunidad dedicada al simracing en Forza Motorsport. Promovemos una competencia justa y responsable, con reglamentos estrictos que garantizan el respeto en pista. Nuestro objetivo es fomentar un entorno sano, donde el compromiso y la deportividad sean los pilares de cada carrera.' />
           </div>
         </Seccion>
-        <Seccion apartado='categorias' clases='h-screen 2xl:h-[100%] flex items-center bg-[#0007]'>
+        <Seccion apartado='categorias' clases='h-screen 2xl:h-[720px] scroll-mt-[200px] flex items-center bg-[#0007]'>
           <div ref={container2Ref} className="flex flex-col gap-10 p-8 w-full relative -top-[10%] transition-all duration-500 opacity-0">
             <SeccionPrincipal clases='flex-wrap' img1={
               <Image enlace={fmCat1} clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:min-w-[300px] 2xl:min-w-[400px] max-w-full' />

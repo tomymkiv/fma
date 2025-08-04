@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logo from '../assets/logo-fma.png'
+import logo from '../assets/logo-fma-blanco.png'
 
 function Intro() {
     const [logoClass, setLogoClass] = useState({
