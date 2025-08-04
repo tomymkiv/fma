@@ -101,7 +101,7 @@ function App() {
           </div>
         </Seccion>
       </main>
-      <footer className='flex flex-col items-center justify-center gap-5 px-5 py-12 bg-gradient-to-b from-[#111] to-[#222]'>
+      <footer className='flex flex-col items-center justify-center gap-5 px-5 py-12 bg-gradient-to-b from-[#0007] to-[#222]'>
         <ul className='hidden sm:flex items-center flex-wrap justify-center gap-10 text-gray-300 font-medium'>
           <NavLinks apartado='#presentacion' text='Inicio' clases='!p-3 text-center' />
           <NavLinks apartado='#sobrenosotros' text='Sobre nosotros' clases='!p-3 text-center' />
