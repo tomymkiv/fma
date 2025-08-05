@@ -11,7 +11,13 @@ import NavLinks from './components/nav/NavLinks';
 import Seccion from './components/Seccion';
 import Image from './components/images/Image';
 import SeccionPrincipal from './components/SeccionPrincipal';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+type Video = {
+  title: string,
+  link: string,
+  embebedCode: string,
+}
 
 function App() {
   const container1Ref = useRef(null);
@@ -20,13 +26,11 @@ function App() {
   const year = new Date().getFullYear();
 
   useEffect(() => {
-
     if (!container1Ref.current || !container2Ref.current || !container3Ref.current)
-      return; // Si no existe, salgo
+      return; // Si no existe ningun apartado, salgo
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-
         // Que se muestre si paso por encima
         if (entry.isIntersecting && entry.target.classList.contains('opacity-0')) {
           entry.target.classList.replace('opacity-0', 'opacity-100');
@@ -37,10 +41,9 @@ function App() {
           entry.target.classList.replace('opacity-100', 'opacity-0');
           entry.target.classList.replace('top-0', '-top-[10%]');
         }
-
       })
     }, {
-      threshold: 0.45
+      threshold: 0.5
     });
 
     observer.observe(container1Ref.current);
@@ -51,11 +54,33 @@ function App() {
       observer.disconnect();
     }
   }, [])
+  // JSON con informacion del canal de youtube de FMA
+  const url = 'https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=UCM9TFnuRQoYUp3PyzCgXT8A';
+  const [videos, setVideos] = useState<Video[]>([]);
+  const videosLimit = 4;
+
+  useEffect(() => {
+    fetch(url)
+
+      .then(res => { return res.json() }
+      ).then(data => {
+        // Obtengo los ultimos 5 elementos y los recorro para almacenarlos
+        const videosFormateados = data['items'].slice(0, videosLimit).map((videos: any) => ({
+          title: videos.title,
+          link: videos.link,
+          embebedCode: videos.link.split('?v=')[1], // tomo solo el id del final
+        }));
+
+        setVideos(videosFormateados)
+      }).catch(err => {
+        console.error('Error al traer los videos: ', err);
+      })
+  }, [])
 
   return (
     <>
       <Intro />
-      <header className='w-auto sticky inset-x-0 top-0 z-4 bg-black p-0 md:py-6 shadow-md shadow-black'>
+      <header className='w-auto sticky inset-x-0 top-0 z-4 bg-black/80 p-0 md:py-6 shadow-md shadow-black'>
         <nav>
           <div className='md:hidden'>
             <button id='menu-btn' onClick={Menu} className='flex p-6 flex-col gap-1 mx-3'>
@@ -69,9 +94,10 @@ function App() {
                   <path d="M201.4 297.4C188.9 309.9 188.9 330.2 201.4 342.7L361.4 502.7C373.9 515.2 394.2 515.2 406.7 502.7C419.2 490.2 419.2 469.9 406.7 457.4L269.3 320L406.6 182.6C419.1 170.1 419.1 149.8 406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3L201.3 297.3z" />
                 </svg>
               </button>
-              <NavLinks apartado='#presentacion' text='Presentacion' />
+              <NavLinks apartado='#home' text='Inicio' />
               <NavLinks apartado='#sobrenosotros' text='Sobre nosotros' />
               <NavLinks apartado='#categorias' text='Categorias' />
+              <NavLinks apartado='#carreras' text='Últimas carreras' />
               <NavLinks apartado='#contacto' text='Contacto' />
             </ul>
           </div>
@@ -82,16 +108,16 @@ function App() {
               </a>
             </div>
             <div className='flex justify-center gap-5 text-lg font-medium mr-10'>
-              <NavLinks apartado='#presentacion' text='Presentacion' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
               <NavLinks apartado='#sobrenosotros' text='Sobre nosotros' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
               <NavLinks apartado='#categorias' text='Categorías' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
+              <NavLinks apartado='#carreras' text='Últimas carreras' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
               <NavLinks apartado='#contacto' text='Contacto' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
             </div>
           </ul>
         </nav>
       </header>
       <main id='home'>
-        <Seccion apartado='presentacion' clases='!my-0'>
+        <Seccion apartado='presentacion' clases='!my-0 !h-auto !block'>
           <div className='w-full flex items-center justify-center'>
             <img src={fmPhoto} className='w-screen h-screen opacity-30 lg:animate-[zoom_12s_ease-in-out_infinite_alternate] -z-1 object-cover block object-center' alt="" />
           </div>
@@ -106,12 +132,12 @@ function App() {
             </article>
           </div>
         </Seccion>
-        <Seccion apartado='sobrenosotros' clases='h-screen flex items-center bg-[#090909]'>
+        <Seccion apartado='sobrenosotros' clases='bg-[#090909]'>
           <div ref={container1Ref} className="flex flex-col gap-10 lg:gap-6.5 p-8 relative -top-[10%] scroll-mt-[50px] transition-all duration-500 opacity-0 w-full">
             <SeccionPrincipal img1={<Image enlace={fmPhoto} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='¿Quiénes somos?' text='Forza Motorsport Argentina (FMA) es una comunidad dedicada al simracing en Forza Motorsport. Promovemos una competencia justa y responsable, con reglamentos estrictos que garantizan el respeto en pista. Nuestro objetivo es fomentar un entorno sano, donde el compromiso y la deportividad sean los pilares de cada carrera.' />
           </div>
         </Seccion>
-        <Seccion apartado='categorias' clases='h-screen 2xl:h-[720px] scroll-mt-[200px] flex items-center bg-[#0007]'>
+        <Seccion apartado='categorias' clases='2xl:h-[900px] xl:scroll-mt-[200px] bg-[#090909]'>
           <div ref={container2Ref} className="flex flex-col gap-10 p-8 w-full relative -top-[10%] transition-all duration-500 opacity-0">
             <SeccionPrincipal clases='flex-wrap' img1={
               <Image enlace={fmCat1} clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:min-w-[300px] 2xl:min-w-[400px] max-w-full' />
@@ -120,7 +146,24 @@ function App() {
             } title='Categorías activas' />
           </div>
         </Seccion>
-        <Seccion apartado='contacto' clases='h-screen flex items-center bg-[#0007]'>
+        <Seccion apartado='carreras' clases='!h-auto pt-50 flex justify-center bg-[#090909]'>
+          <div className="flex flex-col items-center gap-15 justify-center">
+            <div>
+              <h2 className='text-3xl font-bold'>Ultimas carreras</h2>
+            </div>
+            <div className="flex flex-col gap-10 p-8 w-full">
+              <section className='flex flex-col justify-center items-center xl:flex-row flex-wrap gap-20 xl:gap-10 xl:gap-y-20 items-center'>
+                {videos.map((video, i) =>
+                  <div key={i} className="flex flex-col items-center justify-center space-y-5 xl:w-[35%]">
+                    <h4 className="text-xl font-semibold">{video.title}</h4>
+                    <iframe src={'https://www.youtube.com/embed/' + video.embebedCode} className='border border-gray-700 min-w-[200px] max-w-[500px] h-[350px] aspect-16/9 w-full rounded-lg' />
+                  </div>
+                )}
+              </section>
+            </div>
+          </div>
+        </Seccion>
+        <Seccion apartado='contacto' clases='bg-[#090909]'>
           <div ref={container3Ref} className="flex flex-col gap-10 scroll-mt-[50px] p-8 relative -top-[10%] w-full transition-all duration-500 opacity-0">
             <SeccionPrincipal img1={<Image enlace={contactImg} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='Contactanos' text='Ante cualquier duda que tengas, podés comunicarte con nosotros mediante nuestras redes sociales:' >
               <div className="flex items-center justify-center gap-10">
@@ -140,11 +183,12 @@ function App() {
           </div>
         </Seccion>
       </main>
-      <footer className='flex flex-col items-center justify-center gap-5 px-5 py-12 bg-gradient-to-b from-[#0007] to-[#222]'>
+      <footer className='flex flex-col items-center justify-center gap-5 px-5 py-12 bg-gradient-to-b from-[#090909] to-[#222]'>
         <ul className='hidden sm:flex items-center flex-wrap justify-center gap-10 text-gray-300 font-medium'>
-          <NavLinks apartado='#presentacion' text='Inicio' clases='!p-3 text-center' />
+          <NavLinks apartado='#home' text='Inicio' clases='!p-3 text-center' />
           <NavLinks apartado='#sobrenosotros' text='Sobre nosotros' clases='!p-3 text-center' />
           <NavLinks apartado='#categorias' text='Categorías' clases='!p-3 text-center' />
+          <NavLinks apartado='#carreras' text='Últimas carreras' clases='!p-3 text-center' />
           <NavLinks apartado='#contacto' text='Contacto' clases='!p-3 text-center' />
         </ul>
         <p className='text-sm font-medium text-gray-300'>Forza Motorsport Argentina - {year}</p>
