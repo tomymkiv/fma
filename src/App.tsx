@@ -12,9 +12,9 @@ import Seccion from './components/Seccion';
 import Image from './components/images/Image';
 import SeccionPrincipal from './components/SeccionPrincipal';
 import { useEffect, useRef, useState } from 'react';
+import Carousel from './components/Carousel';
 
 type Video = {
-  title: string,
   link: string,
   embebedCode: string,
 }
@@ -57,7 +57,6 @@ function App() {
   // JSON con informacion del canal de youtube de FMA
   const url = 'https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=UCM9TFnuRQoYUp3PyzCgXT8A';
   const [videos, setVideos] = useState<Video[]>([]);
-  const videosLimit = 4;
 
   useEffect(() => {
     fetch(url)
@@ -65,12 +64,10 @@ function App() {
       .then(res => { return res.json() }
       ).then(data => {
         // Obtengo los ultimos 5 elementos y los recorro para almacenarlos
-        const videosFormateados = data['items'].slice(0, videosLimit).map((videos: any) => ({
-          title: videos.title,
+        const videosFormateados = data['items'].map((videos: any) => ({
           link: videos.link,
           embebedCode: videos.link.split('?v=')[1], // tomo solo el id del final
         }));
-
         setVideos(videosFormateados)
       }).catch(err => {
         console.error('Error al traer los videos: ', err);
@@ -80,7 +77,7 @@ function App() {
   return (
     <>
       <Intro />
-      <header className='w-auto sticky inset-x-0 top-0 z-4 bg-black/80 p-0 md:py-6 shadow-md shadow-black'>
+      <header className='w-auto sticky inset-x-0 top-0 z-4 bg-[#000e] p-0 md:py-6 shadow-md shadow-black'>
         <nav>
           <div className='md:hidden'>
             <button id='menu-btn' onClick={Menu} className='flex p-6 flex-col gap-1 mx-3'>
@@ -147,19 +144,18 @@ function App() {
           </div>
         </Seccion>
         <Seccion apartado='carreras' clases='!h-auto pt-50 flex justify-center bg-[#090909]'>
-          <div className="flex flex-col items-center gap-15 justify-center">
+          <div className="flex flex-col gap-15 justify-center overflow-hidden">
             <div>
               <h2 className='text-3xl font-bold'>Ultimas carreras</h2>
             </div>
-            <div className="flex flex-col gap-10 p-8 w-full">
-              <section className='flex flex-col justify-center items-center xl:flex-row flex-wrap gap-20 xl:gap-10 xl:gap-y-20 items-center'>
-                {videos.map((video, i) =>
-                  <div key={i} className="flex flex-col items-center justify-center space-y-5 xl:w-[35%]">
-                    <h4 className="text-xl font-semibold">{video.title}</h4>
-                    <iframe src={'https://www.youtube.com/embed/' + video.embebedCode} className='border border-gray-700 min-w-[200px] max-w-[500px] h-[350px] aspect-16/9 w-full rounded-lg' />
-                  </div>
-                )}
-              </section>
+            <div className="flex flex-col items-center gap-10 w-full">
+              <div className=''>
+                <Carousel>
+                  {videos.map(video =>
+                    <iframe src={'https://www.youtube.com/embed/' + video.embebedCode} className='border border-gray-700 w-[300px] h-[330px] xl:min-w-full xl:min-h-[440px] aspect-16/9 w-full rounded-lg' />
+                  )}
+                </Carousel>
+              </div>
             </div>
           </div>
         </Seccion>
