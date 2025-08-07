@@ -15,8 +15,9 @@ import { useEffect, useRef, useState } from 'react';
 import Carousel from './components/Carousel';
 
 type Video = {
-  link: string,
-  embebedCode: string,
+  portada?: string,
+  link?: string,
+  embebedCode?: string,
 }
 
 function App() {
@@ -54,20 +55,30 @@ function App() {
       observer.disconnect();
     }
   }, [])
+
   // JSON con informacion del canal de youtube de FMA
   const url = 'https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=UCM9TFnuRQoYUp3PyzCgXT8A';
   const [videos, setVideos] = useState<Video[]>([]);
 
   useEffect(() => {
     fetch(url)
-
       .then(res => { return res.json() }
       ).then(data => {
-        // Obtengo los ultimos 5 elementos y los recorro para almacenarlos
-        const videosFormateados = data['items'].map((videos: any) => ({
-          link: videos.link,
-          embebedCode: videos.link.split('?v=')[1], // tomo solo el id del final
-        }));
+        // Obtengo los ultimos 10 elementos y los recorro para almacenarlos
+        let videosFormateados = [];
+
+        // Pregunto cual pantalla tengo, para traer mas o menos info
+        if (innerWidth >= 768) {
+          videosFormateados = data['items'].map((videos: any) => ({
+            embebedCode: videos.link.split('?v=')[1], // tomo solo el id del final
+          }));
+        } else {
+          // tomo solo la portada y link en caso de usar un dispositivo con pantalla < 768px
+          videosFormateados = data['items'].map((videos: any) => ({
+            portada: videos.thumbnail,
+            link: videos.link,
+          }));
+        }
         setVideos(videosFormateados)
       }).catch(err => {
         console.error('Error al traer los videos: ', err);
@@ -144,19 +155,35 @@ function App() {
           </div>
         </Seccion>
         <Seccion apartado='carreras' clases='!h-auto pt-50 flex justify-center bg-[#090909]'>
-          <div className="flex flex-col gap-15 justify-center overflow-hidden">
+          <div className="flex flex-col gap-15 w-full justify-center overflow-x-hidden">
             <div>
               <h2 className='text-3xl font-bold'>Ultimas carreras</h2>
             </div>
             <div className="flex flex-col items-center gap-10 w-full">
-              <div className=''>
+              <div className='flex items-center justify-center w-full'>
                 <Carousel>
-                  {videos.map(video =>
-                    <iframe src={'https://www.youtube.com/embed/' + video.embebedCode} className='border border-gray-700 w-[300px] h-[330px] xl:min-w-full xl:min-h-[440px] aspect-16/9 w-full rounded-lg' />
-                  )}
+                  {/* para pantallas grandes se seguirá mostrando los iframes (mayor consumo de recursos) */}
+                  {innerWidth >= 768
+                    ? videos.map((video, idx) => (
+                      <iframe
+                        key={idx}
+                        src={'https://www.youtube.com/embed/' + video.embebedCode}
+                        className='hidden md:block border border-gray-700 aspect-16/9 w-full rounded-lg'
+                        loading='lazy'
+                      />
+                    ))
+                    : videos.map((video, idx) => (
+                      <div key={idx} className="snap-start snap-always md:hidden">
+                        <a href={video.link} target='_blank'>
+                          <img src={video.portada} alt="" className="w-full min-w-[280px] max-w-[300px] sm:min-w-[350px] sm:max-w-[350px] border border-gray-500 shadow-sm shadow-white/60 rounded-lg" />
+                        </a>
+                      </div>
+                    ))
+                  }
                 </Carousel>
               </div>
             </div>
+
           </div>
         </Seccion>
         <Seccion apartado='contacto' clases='bg-[#090909]'>
