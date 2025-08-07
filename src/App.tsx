@@ -64,6 +64,7 @@ function App() {
     fetch(url)
       .then(res => { return res.json() }
       ).then(data => {
+        console.log(data);
         // Obtengo los ultimos 10 elementos y los recorro para almacenarlos
         let videosFormateados = [];
 
@@ -87,7 +88,7 @@ function App() {
 
   return (
     <>
-      <Intro />
+      {/* <Intro /> */}
       <header className='w-auto sticky inset-x-0 top-0 z-4 bg-[#000e] p-0 md:py-6 shadow-md shadow-black'>
         <nav>
           <div className='md:hidden'>

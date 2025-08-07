@@ -45,8 +45,8 @@ function Carousel(props: Props) {
                         <div className="flex items-center justify-center gap-2">
                             {children.map((_, i) => (
                                 <div key={i} className={`
-                            transition-all size-3 bg-gray-200 rounded-full
-                            ${curr === i ? 'p-2.5 border border-[5px] border-gray-500' : 'bg-opacity-50'}
+                            transition-all size-1.5 bg-gray-200 rounded-full
+                            ${curr === i ? 'p-1.5' : 'bg-opacity-50'}
                             `} />
                             ))}
                         </div>
