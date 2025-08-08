@@ -46,7 +46,7 @@ function Intro() {
             }, 2000)
         }, 3000);
     }, [])
-    return <div className={'animate-spin fixed z-5 h-screen w-screen flex flex-col gap-8 items-center justify-center text-gray-200 transition-background duration-2300 ease ' + containerBackground}>
+    return <div className={'fixed z-5 h-screen w-screen flex flex-col gap-8 items-center justify-center text-gray-200 transition-background duration-2300 ease ' + containerBackground}>
         <img
             src={logo}
             alt="Logo FMA"

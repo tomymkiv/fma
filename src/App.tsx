@@ -64,22 +64,15 @@ function App() {
     fetch(url)
       .then(res => { return res.json() }
       ).then(data => {
-        console.log(data);
         // Obtengo los ultimos 10 elementos y los recorro para almacenarlos
         let videosFormateados = [];
 
         // Pregunto cual pantalla tengo, para traer mas o menos info
-        if (innerWidth >= 768) {
-          videosFormateados = data['items'].map((videos: any) => ({
-            embebedCode: videos.link.split('?v=')[1], // tomo solo el id del final
-          }));
-        } else {
-          // tomo solo la portada y link en caso de usar un dispositivo con pantalla < 768px
-          videosFormateados = data['items'].map((videos: any) => ({
-            portada: videos.thumbnail,
-            link: videos.link,
-          }));
-        }
+        // tomo solo la portada y link en caso de usar un dispositivo con pantalla < 768px
+        videosFormateados = data['items'].map((videos: any) => ({
+          portada: videos.thumbnail,
+          link: videos.link,
+        }));
         setVideos(videosFormateados)
       }).catch(err => {
         console.error('Error al traer los videos: ', err);
@@ -88,7 +81,7 @@ function App() {
 
   return (
     <>
-      {/* <Intro /> */}
+      <Intro />
       <header className='w-auto sticky inset-x-0 top-0 z-4 bg-[#000e] p-0 md:py-6 shadow-md shadow-black'>
         <nav>
           <div className='md:hidden'>
@@ -156,7 +149,7 @@ function App() {
           </div>
         </Seccion>
         <Seccion apartado='carreras' clases='!h-auto pt-50 flex justify-center bg-[#090909]'>
-          <div className="flex flex-col gap-15 w-full justify-center overflow-x-hidden">
+          <div className="flex flex-col gap-6 w-full justify-center overflow-x-hidden">
             <div>
               <h2 className='text-3xl font-bold'>Ultimas carreras</h2>
             </div>
@@ -164,27 +157,19 @@ function App() {
               <div className='flex items-center justify-center w-full'>
                 <Carousel>
                   {/* para pantallas grandes se seguirá mostrando los iframes (mayor consumo de recursos) */}
-                  {innerWidth >= 768
-                    ? videos.map((video, idx) => (
-                      <iframe
-                        key={idx}
-                        src={'https://www.youtube.com/embed/' + video.embebedCode}
-                        className='hidden md:block border border-gray-700 aspect-16/9 w-full rounded-lg'
-                        loading='lazy'
-                      />
-                    ))
-                    : videos.map((video, idx) => (
-                      <div key={idx} className="snap-start snap-always md:hidden">
-                        <a href={video.link} target='_blank'>
-                          <img src={video.portada} alt="" className="w-full min-w-[280px] max-w-[300px] sm:min-w-[350px] sm:max-w-[350px] border border-gray-500 shadow-sm shadow-white/60 rounded-lg" />
-                        </a>
+                  {videos.map((video, idx) => (
+                    <div key={idx} className="snap-start snap-always relative">
+                      <div className='hidden md:flex absolute items-center justify-center bg-gray-300/80 w-full h-full -z-1 rounded-lg text-3xl select-none text-gray-800'>
+                      Ver video en Youtube
                       </div>
-                    ))
-                  }
+                      <a href={video.link} target='_blank' className='md:hover:opacity-20 transition-opacity duration-400'>
+                        <img src={video.portada} alt="" className="w-full min-w-[280px] max-w-[300px] sm:min-w-[350px] md:min-w-[550px] xl:min-w-[800px] border border-gray-500 rounded-lg" />
+                      </a>
+                    </div>
+                  ))}
                 </Carousel>
               </div>
             </div>
-
           </div>
         </Seccion>
         <Seccion apartado='contacto' clases='bg-[#090909]'>
