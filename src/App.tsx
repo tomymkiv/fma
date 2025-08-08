@@ -105,7 +105,7 @@ function App() {
           <ul className='hidden md:flex items-center md:justify-between lg:justify-around'>
             <div>
               <a href="#home">
-                <img src={logo} alt="" className='ml-5 w-full max-w-[150px]' />
+                <img src={logo} alt="" className='ml-5 w-full max-w-[150px] drop-shadow-fma-blue transition-all duration-400' />
               </a>
             </div>
             <div className='flex justify-center gap-5 text-lg font-medium mr-10'>
