@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import Carousel from "./components/Carousel";
 import Seccion from "./components/Seccion";
+import NavBar from "./components/Navbar";
+import Footer from "./components/Footer";
+// import BackBtn from "./components/BackBtn";
+
 type Video = {
     portada?: string,
     link?: string,
@@ -28,31 +32,34 @@ function Carreras() {
             })
     }, [])
 
-
-    return <Seccion apartado='carreras' clases='flex justify-center bg-[#090909]'>
-        <div className="flex flex-col gap-6 w-full justify-center overflow-x-hidden">
-            <div>
-                <h2 className='text-3xl font-bold'>Ultimas carreras</h2>
-            </div>
-            <div className="flex flex-col items-center gap-10 w-full">
-                <div className='flex items-center justify-center w-full'>
-                    <Carousel>
-                        {/* para pantallas grandes se seguirá mostrando los iframes (mayor consumo de recursos) */}
-                        {videos.map((video, idx) => (
-                            <div key={idx} className="snap-start snap-always relative">
-                                <div className='hidden md:flex absolute items-center justify-center bg-gray-300/80 w-full h-full -z-1 rounded-lg text-3xl text-gray-800'>
-                                    Ver video en Youtube
+    return <>
+        <NavBar />
+        <Seccion apartado='carreras' clases='flex justify-center bg-[#090909]'>
+            {/* <BackBtn /> */}
+            <div className="flex flex-col gap-6 w-full justify-center overflow-x-hidden">
+                <div>
+                    <h2 className='text-3xl font-bold'>Ultimas carreras</h2>
+                </div>
+                <div className="flex flex-col items-center gap-10 w-full">
+                    <div className='flex items-center justify-center w-full'>
+                        <Carousel>
+                            {/* para pantallas grandes se seguirá mostrando los iframes (mayor consumo de recursos) */}
+                            {videos.map((video, idx) => (
+                                <div key={idx} className="snap-start snap-always relative">
+                                    <div className='hidden md:flex absolute items-center justify-center bg-gray-300/80 w-full h-full -z-1 rounded-lg text-3xl text-gray-800'>
+                                        Ver video en Youtube
+                                    </div>
+                                    <a href={video.link} target='_blank' className='md:hover:opacity-20 transition-opacity duration-400'>
+                                        <img src={video.portada} alt="" className="w-full min-w-[280px] max-w-[300px] sm:min-w-[350px] md:min-w-[550px] xl:min-w-[800px] border border-gray-500 rounded-lg" />
+                                    </a>
                                 </div>
-                                <a href={video.link} target='_blank' className='md:hover:opacity-20 transition-opacity duration-400'>
-                                    <img src={video.portada} alt="" className="w-full min-w-[280px] max-w-[300px] sm:min-w-[350px] md:min-w-[550px] xl:min-w-[800px] border border-gray-500 rounded-lg" />
-                                </a>
-                            </div>
-                        ))}
-                    </Carousel>
+                            ))}
+                        </Carousel>
+                    </div>
                 </div>
             </div>
-        </div>
-    </Seccion>
-        ;
+        </Seccion>
+        <Footer />
+    </>
 }
 export default Carreras;

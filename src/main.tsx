@@ -7,11 +7,13 @@ import NotFoundPage from './NotFoundPage.tsx'
 import Categorias from './Categorias.tsx'
 import Carreras from './Carreras.tsx'
 
+// createHashRouter
 // Creador de rutas
 const router = createHashRouter([
   { path: '/', element: <App /> }, // asigno la ruta '/' al componente "app"
   { path: '/categorias', element: <Categorias /> },
   { path: '/carreras', element: <Carreras /> },
+  // { path: '/sobrenosotros', element: <About /> },
   { path: '*', element: <NotFoundPage /> },
 ])
 

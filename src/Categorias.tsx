@@ -1,6 +1,8 @@
 import fmCat1 from './assets/fma-categoria-1.webp'
 import fmCat2 from './assets/fma-categoria-2.webp'
+import Footer from './components/Footer';
 import Image from "./components/images/Imagen";
+import NavBar from './components/Navbar';
 import Seccion from "./components/Seccion";
 import SeccionPrincipal from "./components/SeccionPrincipal";
 // type Pilotos = {
@@ -55,15 +57,17 @@ function Categorias() {
     //     // console.log(pilotosLMH)
     // }, [])
 
-    return <Seccion apartado='categorias' clases='flex flex-col items-center justify-center bg-[#090909]'>
-        <div className="flex flex-col gap-10 p-8 w-full">
-            <h2 className='lg:hidden'>Haz click en las imágenes para ver más información</h2>
-            <SeccionPrincipal clases='flex-wrap' img1={
-                <Image href='https://www.instagram.com/p/DMTisbPR8lY/?img_index=1' enlace={fmCat1} clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:min-w-[300px] 2xl:min-w-[400px] max-w-full' />
-            } img2={
-                <Image href='https://www.instagram.com/p/DMk7I9mxZcZ/?img_index=1' enlace={fmCat2} clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:min-w-[300px] 2xl:min-w-[400px] max-w-full' />
-            } title='Categorías activas' />
-            {/* <table className="table-auto border-collapse border border-gray-400 overflow-scroll">
+    return <>
+        <NavBar />
+        <Seccion apartado='categorias' clases='flex flex-col items-center justify-center bg-[#090909]'>
+            <div className="flex flex-col gap-10 p-8 w-full">
+                <h2 className='lg:hidden'>Haz click en las imágenes para ver más información</h2>
+                <SeccionPrincipal clases='flex-wrap' img1={
+                    <Image href='https://www.instagram.com/p/DMTisbPR8lY/?img_index=1' enlace={fmCat1} clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:min-w-[300px] 2xl:min-w-[400px] max-w-full' />
+                } img2={
+                    <Image href='https://www.instagram.com/p/DMk7I9mxZcZ/?img_index=1' enlace={fmCat2} clases='min-w-[80px] max-w-[140px] sm:max-w-[200px] lg:min-w-[300px] 2xl:min-w-[400px] max-w-full' />
+                } title='Categorías activas' />
+                {/* <table className="table-auto border-collapse border border-gray-400 overflow-scroll">
                 <thead>
                     <tr>
                         <th className="border border-gray-400 px-4 py-2">Auto</th>
@@ -81,8 +85,11 @@ function Categorias() {
                     ))}
                 </tbody>
             </table> */}
-        </div>
-    </Seccion>;
+            </div>
+        </Seccion>
+        <Footer />
+    </>
+
 }
 
 export default Categorias;
