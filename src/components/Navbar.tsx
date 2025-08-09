@@ -19,10 +19,10 @@ function NavBar() {
                         </svg>
                     </button>
                     <NavLinks apartado='/' text='Inicio' clases='text-gray-200' />
-                    <NavLinks apartado='#sobrenosotros' text='Sobre nosotros' clases='text-gray-200' />
+                    {/* <NavLinks apartado='#sobrenosotros' text='Sobre nosotros' clases='text-gray-200' /> */}
                     <NavLinks apartado='/categorias' text='Categorias' clases='text-gray-200' />
                     <NavLinks apartado='/carreras' text='Últimas carreras' clases='text-gray-200' />
-                    <NavLinks apartado='#contacto' text='Contacto' clases='text-gray-200' />
+                    {/* <NavLinks apartado='#contacto' text='Contacto' clases='text-gray-200' /> */}
                 </ul>
             </div>
             <ul className='hidden md:flex items-center md:justify-between lg:justify-around'>
@@ -32,10 +32,10 @@ function NavBar() {
                     </Link>
                 </div>
                 <div className='flex justify-center gap-5 text-lg font-medium mr-10'>
-                    <NavLinks apartado='#sobrenosotros' text='Sobre nosotros' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
+                    {/* <NavLinks apartado='#sobrenosotros' text='Sobre nosotros' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' /> */}
                     <NavLinks apartado='/categorias' text='Categorías' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
                     <NavLinks apartado='/carreras' text='Últimas carreras' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
-                    <NavLinks apartado='#contacto' text='Contacto' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' />
+                    {/* <NavLinks apartado='#contacto' text='Contacto' clases='text-gray-500 hover:text-gray-200 transition-colors duration-350' /> */}
                 </div>
             </ul>
         </nav>

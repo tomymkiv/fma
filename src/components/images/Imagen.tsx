@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
-    href?: string;
+    href: string;
     enlace: string;
     clases?: string;
 }
@@ -11,21 +12,20 @@ function Imagen(props: Props) {
     const [hover, setHover] = useState(false);
 
     useEffect(() => {
-        if (props.href) {
+        if (props.href !== '#') {
             setHover(true)
         }
     }, [])
 
-    return <a href={href} target="_blank" className="relative">
+    return <Link to={href} className="relative">
         {hover ? <div className="hidden lg:flex absolute bg-white/75 opacity-0 transition-opacity duration-400 hover:opacity-75 rounded-lg w-full h-full text-gray-800 text-xl lg:text-3xl items-center justify-center">
-            Ver publicación
+            Ver resultados
         </div>
             :
             ''
         }
-
         <img src={enlace} alt="Imagen" className={'rounded-lg ' + clases} />
-    </a>
+    </Link>
 }
 
 export default Imagen;

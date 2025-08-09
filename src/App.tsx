@@ -50,7 +50,6 @@ function App() {
       <Intro />
       <NavBar />
       <main>
-        {/* <a href="/#contacto" className='text-4xl text-red-500'>contacto</a> */}
         <Seccion apartado='presentacion' clases='!my-0 !block'>
           <div className='w-full flex items-center justify-center'>
             <img src={fmPhoto} className='w-screen h-screen opacity-30 lg:animate-[zoom_12s_ease-in-out_infinite_alternate] -z-1 object-cover block object-center' alt="" />
@@ -66,14 +65,14 @@ function App() {
             </article>
           </div>
         </Seccion>
-        <Seccion apartado='sobrenosotros' clases='!h-160 lg:!h-185 scroll-mt-[90px] bg-[#090909]'>
+        <Seccion apartado='sobrenosotros' clases='!h-160 lg:!h-185 scroll-mt-[90px]'>
           <div ref={container1Ref} className="flex flex-col gap-10 lg:gap-6.5 p-8 relative -top-[10%] scroll-mt-[50px] transition-all duration-500 opacity-0 w-full">
-            <SeccionPrincipal img1={<Image enlace={fmPhoto} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='¿Quiénes somos?' text='Forza Motorsport Argentina (FMA) es una comunidad dedicada al simracing en Forza Motorsport. Promovemos una competencia justa y responsable, con reglamentos estrictos que garantizan el respeto en pista. Nuestro objetivo es fomentar un entorno sano, donde el compromiso y la deportividad sean los pilares de cada carrera.' />
+            <SeccionPrincipal img1={<Image href='#' enlace={fmPhoto} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='¿Quiénes somos?' text='Forza Motorsport Argentina (FMA) es una comunidad dedicada al simracing en Forza Motorsport. Promovemos una competencia justa y responsable, con reglamentos estrictos que garantizan el respeto en pista. Nuestro objetivo es fomentar un entorno sano, donde el compromiso y la deportividad sean los pilares de cada carrera.' />
           </div>
         </Seccion>
-        <Seccion apartado='contacto' clases='!h-160 lg:!h-185 bg-[#090909]'>
+        <Seccion apartado='contacto' clases='!h-160 lg:!h-185'>
           <div ref={container2Ref} className="flex flex-col gap-10 scroll-mt-[50px] p-8 relative -top-[10%] w-full transition-all duration-500 opacity-0">
-            <SeccionPrincipal img1={<Image enlace={contactImg} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='Contactanos' text='¿Te interesa participar? Seguinos en nuestras redes sociales y te contamos mucho más.' >
+            <SeccionPrincipal img1={<Image href='#' enlace={contactImg} clases='md:max-w-[500px] lg:max-w-[370px] lg:w-full 2xl:max-w-[600px]' />} title='Contactanos' text='¿Te interesa participar? Seguinos en nuestras redes sociales y te contamos mucho más.' >
               <div className="flex flex-wrap items-center justify-center gap-10">
                 <a href="https://www.instagram.com/liga_fma/" target='__blank'>
                   <svg className='drop-shadow-white transition-all duration-500 w-[50px] fill-gray-200' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
