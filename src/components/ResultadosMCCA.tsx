@@ -32,7 +32,6 @@ function ResultadosMCCA() {
                 }))
 
                 setPilotosLMH(pilotosLMH);
-                console.log(pilotosLMH)
             });
         fetch("https://opensheet.elk.sh/1Xy1nF3jUiaJYgKDCTFqDejCyxRMM7KhwfA3IRzSgAGY/Championship+Standings+GT3")
             .then(res => res.json())
@@ -46,10 +45,7 @@ function ResultadosMCCA() {
                 }))
 
                 setPilotosGT3(pilotosGT3);
-                console.log(pilotosGT3)
             });
-        // console.log(pilotosGT3)
-        // console.log(pilotosLMH)
     }, [])
 
     return <>
