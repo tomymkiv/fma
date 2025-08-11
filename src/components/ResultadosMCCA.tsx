@@ -65,7 +65,7 @@ function ResultadosMCCA() {
                         <tr key={index}>
                             <td className="border border-gray-400 px-4 py-2">{piloto.gamertag}</td>
                             <td className="border border-gray-400 px-4 py-2">{piloto.auto}</td>
-                            <td className="border border-gray-400 px-4 py-2">{piloto.puntosTotales}</td>
+                            <td className="border border-gray-400 px-4 py-2 text-right">{piloto.puntosTotales}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -84,7 +84,7 @@ function ResultadosMCCA() {
                         <tr key={index}>
                             <td className="border border-gray-400 px-4 py-2">{piloto.gamertag}</td>
                             <td className="border border-gray-400 px-4 py-2">{piloto.auto}</td>
-                            <td className="border border-gray-400 px-4 py-2">{piloto.puntosTotales}</td>
+                            <td className="border border-gray-400 px-4 py-2 text-right">{piloto.puntosTotales}</td>
                         </tr>
                     ))}
                 </tbody>
