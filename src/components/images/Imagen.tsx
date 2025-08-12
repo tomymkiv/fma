@@ -12,7 +12,7 @@ function Imagen(props: Props) {
     const [hover, setHover] = useState(false);
 
     useEffect(() => {
-        if (props.href !== '#') {
+        if (props.href.includes('categorias')) {
             setHover(true)
         }
     }, [])
