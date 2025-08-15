@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import NavBar from "./Navbar";
 import Footer from "./Footer";
 
-type Pilotos = {
+interface Pilotos {
     imagenLMH: string,
     imagenGT3: string,
 }
