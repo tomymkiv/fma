@@ -1,20 +1,8 @@
 import { useEffect, useState } from "react";
 import NavBar from "./Navbar";
 import Footer from "./Footer";
-type Pilotos = {
-    gamertag: string,
-    auto: string,
-    // fecha1: string,
-    // fecha2: string,
-    // fecha3: string,
-    // fecha4: string,
-    // fecha5: string,
-    // fecha6: string,
-    // fecha7: string,
-    // fecha8: string,
-    // fecha9: string,
-    puntosTotales: string
-}
+import type { Pilotos } from "../types/Types";
+
 function ResultadosSCC() {
     const [pilotosGT3, setPilotosLMH] = useState<Pilotos[]>([])
     const [pilotosTCR, setPilotosGT3] = useState<Pilotos[]>([])
