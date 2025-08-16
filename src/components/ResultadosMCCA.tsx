@@ -28,29 +28,25 @@ function ResultadosMCCA() {
         <NavBar />
         <div className="flex flex-col my-35 text-sm lg:text-lg md:m-10 items-center gap-5 justify-center mx-2 text-gray-300">
             <h2 className="text-4xl font-medium">Resultados de LMH</h2>
-            <table className="table-auto overflow-scroll">
-                <tbody>
-                    {categorias.map((piloto, index) => (
-                        <tr key={index}>
-                            <td>
-                                <img src={piloto.imagenLMH} className="w-[739px]" />
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <div>
+                {categorias.map((piloto, index) => (
+                    <article key={index}>
+                        <div>
+                            <img src={piloto.imagenLMH} className="w-[739px]" />
+                        </div>
+                    </article>
+                ))}
+            </div>
             <h2 className="text-4xl font-medium mt-20">Resultados de GT3</h2>
-            <table className="table-auto overflow-scroll">
-                <tbody>
-                    {categorias.map((piloto, index) => (
-                        <tr key={index}>
-                            <td>
-                                <img src={piloto.imagenGT3}/>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <div>
+                {categorias.map((piloto, index) => (
+                    <article key={index}>
+                        <div>
+                            <img src={piloto.imagenGT3} />
+                        </div>
+                    </article>
+                ))}
+            </div>
         </div >
         <Footer />
     </>
